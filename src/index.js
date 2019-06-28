@@ -5,3 +5,4 @@
 import './hello-riad/block';
 // ./block-meta is enqueued with php block-meta.php file
 // import './plugin-sidebar/plugin-sidebar-es5';
+import './post-controller/post-controller';
