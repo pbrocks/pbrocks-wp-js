@@ -8,7 +8,7 @@
  *
  * @package pbrocks-wp-js
  */
-
+require 'src/block-meta.php';
  /**
   * Retrieves a URL to a file in the plugin's directory.
   *
