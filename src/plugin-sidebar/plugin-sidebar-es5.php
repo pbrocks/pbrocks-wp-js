@@ -20,6 +20,15 @@ function sidebar_plugin_register() {
 			'type'         => 'string',
 		)
 	);
+	register_post_meta(
+		'post',
+		'sidebar_plugin_meta_checkbox',
+		array(
+			'show_in_rest' => true,
+			'single'       => true,
+			'type'         => 'boolean',
+		)
+	);
 	wp_register_style(
 		'plugin-sidebar-css',
 		plugins_url( 'plugin-sidebar.css', __FILE__ )

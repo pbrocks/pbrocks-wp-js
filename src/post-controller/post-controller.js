@@ -6,7 +6,7 @@
     const withSelect = wp.data.withSelect;
     const withDispatch = wp.data.withDispatch;
     const { PluginPostStatusInfo } = wp.editPost;
-	const { FormToggle } = wp.components;
+	const { FormToggle, CheckboxControl } = wp.components;
 	const { withState } = wp.compose;
  
 	const ToggleShowTitle = withState( {
@@ -17,24 +17,35 @@
 	        onChange={ () => setState( state => ( { checked: ! state.checked } ) ) } 
 	    />
 	) );
-	 
-	const PBrocksPostStatus = () => {
-	    return(
-			<PluginPostStatusInfo>
-				<p><ToggleShowTitle></ToggleShowTitle>
-				 &nbsp;Show Page/Post Title</p>
-			</PluginPostStatusInfo>
-	    )
-	}
 
-registerPlugin( 'pbrocks-post-status', { render: PBrocksPostStatus } );
+ 
+// 	const PostTitleCheckbox = withState( {
+// 	    isChecked: true,
+// 	} )( ( { isChecked, setState } ) => (
+// 	    <CheckboxControl
+// 			label = "Show this Post/Page Title??"
+// 			checked = { isChecked }
+// 			onChange = { ( isChecked ) => { setState( { isChecked } ) } }
+// 	    />
+// 	) );
+
+// 	const PBrocksPostStatus = () => {
+// 	    return(
+// 			<PluginPostStatusInfo>
+// 				<PostTitleCheckbox></PostTitleCheckbox>
+// 			</PluginPostStatusInfo>
+// 	    )
+// 	}
+
+// registerPlugin( 'pbrocks-post-status', { render: PBrocksPostStatus } );
 
     const MetaBlockField = function( props ) {
-        return el( Text, {
+        return el( ToggleShowTitle, {
+            title: 'Meta Block Field',
             label: 'Meta Block Field',
             value: props.metaFieldValue,
-            onChange: function( content ) {
-                props.setMetaFieldValue( content );
+            onChange: function( value ) {
+                props.setMetaFieldValue( value );
             },
         } );
     }
@@ -43,7 +54,7 @@ registerPlugin( 'pbrocks-post-status', { render: PBrocksPostStatus } );
         return {
             metaFieldValue: select( 'core/editor' )
                 .getEditedPostAttribute( 'meta' )
-                [ 'sidebar_meta_block_field' ],
+                [ 'sidebar_meta_toggle_field' ],
         }
     } )( MetaBlockField );
  
@@ -52,7 +63,7 @@ registerPlugin( 'pbrocks-post-status', { render: PBrocksPostStatus } );
             return {
                 setMetaFieldValue: function( value ) {
                     dispatch( 'core/editor' ).editPost(
-                        { meta: { sidebar_meta_block_field: value } }
+                        { meta: { sidebar_meta_toggle_field: value } }
                     );
                 }
             }
@@ -69,7 +80,7 @@ registerPlugin( 'pbrocks-post-status', { render: PBrocksPostStatus } );
                 },
                    
                 el( 'div',
-                    { className: 'plugin-sidebar-content' },
+                    { className: 'plugin-sidebar-content', },
                     el( MetaBlockFieldWithDataAndActions )
                 )
             );
