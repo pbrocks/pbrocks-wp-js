@@ -17,6 +17,10 @@ function pbrocks_postmeta_info( $the_content ) {
 }
 
 /**
+ * Trigger the block registration on init.
+ */
+add_action( 'init', 'pbrocks_wp_js_register_block' );
+/**
  * Registers the plugin's block.
  *
  * @since 1.0.0
@@ -35,8 +39,3 @@ function pbrocks_wp_js_register_block() {
 		)
 	);
 }
-
-/**
- * Trigger the block registration on init.
- */
-add_action( 'init', 'pbrocks_wp_js_register_block' );
