@@ -8,7 +8,7 @@
  *
  * @package pbrocks-wp-js
  */
-require 'src/block-meta.php';
+require 'src/blocks-controller.php';
  /**
   * Retrieves a URL to a file in the plugin's directory.
   *
@@ -21,28 +21,3 @@ require 'src/block-meta.php';
 function pbrocks_wp_js_url( $path ) {
 	return plugins_url( $path, __FILE__ );
 }
-
-/**
- * Registers the plugin's block.
- *
- * @since 1.0.0
- */
-function pbrocks_wp_js_register_block() {
-	wp_register_script(
-		'pbrocks-wp-js',
-		pbrocks_wp_js_url( 'dist/index.js' ),
-		array( 'wp-element' )
-	);
-
-	register_block_type(
-		'pbrocks-wp-js/hello-world',
-		array(
-			'editor_script' => 'pbrocks-wp-js',
-		)
-	);
-}
-
-/**
- * Trigger the block registration on init.
- */
-add_action( 'init', 'pbrocks_wp_js_register_block' );

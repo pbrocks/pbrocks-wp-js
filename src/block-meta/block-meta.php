@@ -1,11 +1,4 @@
 <?php
-add_filter( 'the_content', 'pbrocks_postmeta_info' );
-function pbrocks_postmeta_info( $the_content ) {
-	$postmeta = get_post_meta( get_the_ID() );
-	$return   = '<pre>FFS ' . print_r( $postmeta, true ) . '</pre>' . $the_content;
-	return $return;
-}
-
 /**
  * [pbrocks_wp_js_register_post_meta]
  *
@@ -36,7 +29,7 @@ add_action( 'init', 'pbrocks_wp_js_register_post_meta' );
 function pbrocks_wp_js_enqueue() {
 	wp_enqueue_script(
 		'pbrocks-meta',
-		plugins_url( 'block-meta/block-meta.js', __FILE__ ),
+		plugins_url( 'block-meta.js', __FILE__ ),
 		array( 'wp-blocks', 'wp-element', 'wp-components' )
 	);
 }
